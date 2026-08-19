@@ -1,0 +1,268 @@
+%-----------------------------------------------------------------------------------------------------------------------------------------------%
+%	The MIT License (MIT)
+%
+%	Copyright (c) 2021 Jitin Nair
+%
+%	Permission is hereby granted, free of charge, to any person obtaining a copy
+%	of this software and associated documentation files (the "Software"), to deal
+%	in the Software without restriction, including without limitation the rights
+%	to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+%	copies of the Software, and to permit persons to whom the Software is
+%	furnished to do so, subject to the following conditions:
+%	
+%	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+%	IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+%	FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+%	AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+%	LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+%	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+%	THE SOFTWARE.
+%	
+%
+%-----------------------------------------------------------------------------------------------------------------------------------------------%
+
+%----------------------------------------------------------------------------------------
+%	DOCUMENT DEFINITION
+%----------------------------------------------------------------------------------------
+
+% article class because we want to fully customize the page and not use a cv template
+\documentclass[a4paper,12pt]{article}
+
+%----------------------------------------------------------------------------------------
+%	FONT
+%----------------------------------------------------------------------------------------
+
+% % fontspec allows you to use TTF/OTF fonts directly
+% \usepackage{fontspec}
+% \defaultfontfeatures{Ligatures=TeX}
+
+% % modified for ShareLaTeX use
+% \setmainfont[
+% SmallCapsFont = Fontin-SmallCaps.otf,
+% BoldFont = Fontin-Bold.otf,
+% ItalicFont = Fontin-Italic.otf
+% ]
+% {Fontin.otf}
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES
+%----------------------------------------------------------------------------------------
+\usepackage{url}
+\usepackage{parskip} 	
+\usepackage[style=authoryear,sorting=none]{biblatex}
+
+%other packages for formatting
+\RequirePackage{color}
+\RequirePackage{graphicx}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage[scale=0.9]{geometry}
+
+%tabularx environment
+\usepackage{tabularx}
+
+%for lists within experience section
+\usepackage{enumitem}
+
+% centered version of 'X' col. type
+\newcolumntype{C}{>{\centering\arraybackslash}X} 
+
+%to prevent spillover of tabular into next pages
+\usepackage{supertabular}
+\usepackage{tabularx}
+\newlength{\fullcollw}
+\setlength{\fullcollw}{0.47\textwidth}
+
+%custom \section
+\usepackage{titlesec}				
+\usepackage{multicol}
+\usepackage{multirow}
+
+%CV Sections inspired by: 
+%http://stefano.italians.nl/archives/26
+\titleformat{\section}{\Large\scshape\raggedright}{}{0em}{}[\titlerule]
+\titlespacing{\section}{0pt}{10pt}{10pt}
+
+%for publications
+\usepackage[style=authoryear,sorting=ynt, maxbibnames=2]{biblatex}
+
+%Setup hyperref package, and colours for links
+\usepackage[unicode, draft=false]{hyperref}
+\definecolor{linkcolour}{rgb}{0,0.2,0.6}
+\hypersetup{colorlinks,breaklinks,urlcolor=linkcolour,linkcolor=linkcolour}
+\addbibresource{citations.bib}
+\setlength\bibitemsep{1em}
+
+%for social icons
+\usepackage{fontawesome5}
+
+%debug page outer frames
+%\usepackage{showframe}
+
+
+% job listing environments
+\newenvironment{jobshort}[2]
+    {
+    \begin{tabularx}{\linewidth}{@{}l X r@{}}
+    \textbf{#1} & \hfill &  #2 \\[3.75pt]
+    \end{tabularx}
+    }
+    {
+    }
+
+\newenvironment{joblong}[2]
+    {
+    \begin{tabularx}{\linewidth}{@{}l X r@{}}
+    \textbf{#1} & \hfill &  #2 \\[3.75pt]
+    \end{tabularx}
+    \begin{minipage}[t]{\linewidth}
+    \begin{itemize}[nosep,after=\strut, leftmargin=1em, itemsep=3pt,label=--]
+    }
+    {
+    \end{itemize}
+    \end{minipage}    
+    }
+
+
+
+%----------------------------------------------------------------------------------------
+%	BEGIN DOCUMENT
+%----------------------------------------------------------------------------------------
+\begin{document}
+
+% non-numbered pages
+\pagestyle{empty} 
+
+%----------------------------------------------------------------------------------------
+%	TITLE
+%----------------------------------------------------------------------------------------
+
+% \begin{tabularx}{\linewidth}{ @{}X X@{} }
+% \huge{Your Name}\vspace{2pt} & \hfill \emoji{incoming-envelope} email@email.com \\
+% \raisebox{-0.05\height}\faGithub\ username \ | \
+% \raisebox{-0.00\height}\faLinkedin\ username \ | \ \raisebox{-0.05\height}\faGlobe \ mysite.com  & \hfill \emoji{calling} number
+% \end{tabularx}
+
+\begin{tabularx}{\linewidth}{@{} C @{}}
+\Huge{Nico Nastri} \\[7.5pt]
+\href{https://github.com/ngnastri10}{\raisebox{-0.05\height}\faGithub\ Github} \ $|$ \
+\href{https://niconastri.com}{\raisebox{-0.05\height}\faGlobe\ Personal Website} \ $|$ \
+\href{https://www.linkedin.com/in/niconastri/}{\raisebox{-0.05\height}\faLinkedin\ LinkedIn} \ $|$ \ 
+%\href{https://mysite.com}{\raisebox{-0.05\height}\faGlobe \ mysite.com} \ $|$ \ 
+\href{mailto:nn3495a@american.edu}{\raisebox{-0.05\height}\faEnvelope \ nn3495a@american.edu} \ $|$ \ 
+\href{tel:(781) 752-8377}{\raisebox{-0.05\height}\faPhone \ (781) 752-8377} \\
+\end{tabularx}
+
+%----------------------------------------------------------------------------------------
+%	EDUCATION
+%----------------------------------------------------------------------------------------
+\section{Education}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.45\linewidth}%
+                >{\raggedright\arraybackslash}p{0.32\linewidth}%
+                >{\raggedleft\arraybackslash}p{0.18\linewidth}@{}}
+PhD in Economics & \textbf{American University}      & 2022--present \\
+MA in Political Economy & \textbf{Georgetown University} & 2018--2019 \\
+BA in Economics \& International Relations & \textbf{Boston University} & 2012--2016 \\
+\end{tabular}
+
+%----------------------------------------------------------------------------------------
+%	PUBLICATIONS
+%----------------------------------------------------------------------------------------
+\section{Working Papers}
+
+\begin{refsection}[citations.bib]
+\nocite{brunel_nastri_2026_climate_risk}
+\noindent\hspace*{1em}\begin{minipage}{\dimexpr\linewidth-1em\relax}
+  \printbibliography[heading=none]
+\end{minipage}
+\end{refsection}
+
+\section{Works in Progress}
+
+\noindent\hspace*{1em}\begin{minipage}{\dimexpr\linewidth-1em\relax}
+\begin{tabularx}{\linewidth}{@{}X>{\raggedleft\arraybackslash}p{1cm}@{}}
+``ESG Disclosure Mandates and Emissions in Global Value Chains'' 
+& \href{https://niconastri.com/files/ESG_Disclosure_Supply_Chains.pdf}{[PDF]} \\[3pt]
+
+``Carbon Border Adjustments and Directed Technical Change'' 
+& \\
+\end{tabularx}
+\end{minipage}
+
+%Projects
+\section{Teaching \& Research Assistant}
+
+\begin{tabularx}{\linewidth}{@{}>{\hspace{1em}\raggedright\arraybackslash}X
+                                >{\hspace{0.75em}\raggedleft\arraybackslash}p{2.2cm}@{}}
+\multicolumn{2}{@{}l}{\textbf{Teaching Assistant}}\\[2pt]
+Applied Econometrics I                  & 2025 \\
+Microeconomic Analysis I                & 2024 \\
+GIS Applications in Empirical Economics & 2024 \\
+Intro Mathematical Economics            & 2023 \\
+Intermediate Microeconomics             & 2023 \\
+\end{tabularx}
+
+\textbf{Research Assistant}
+
+\begin{refsection}[citations.bib]
+\nocite{WettsteinLiu2022,ChenQuinbyWettstein2022,SilicianoWettstein2021,QuinbyWettstein2021}
+\noindent\hspace*{1em}\begin{minipage}{\dimexpr\linewidth-1em\relax}
+  \printbibliography[heading=none]
+\end{minipage}
+\end{refsection}
+
+%----------------------------------------------------------------------------------------
+% HONORS & AWARDS
+%----------------------------------------------------------------------------------------
+
+\section{Honors \& Awards}
+
+\begin{tabularx}{\linewidth}{@{}>{\hspace{1em}\raggedright\arraybackslash}X
+                                >{\hspace{0.75em}\raggedleft\arraybackslash}p{2.2cm}@{}}
+Frank M. Tamagna Scholarship & 2026 \\
+Econometrics Paper Competition (AU Economics Department) & 2026 \\
+\end{tabularx}
+
+
+%----------------------------------------------------------------------------------------
+% CONFERENCES & SEMINARS SECTIONS
+%----------------------------------------------------------------------------------------
+
+\section{Seminar \& Conference Presentation}
+
+\textit{2026} Midwest Economics Association; World Congress of Environmental and Resource Economics (WCERE)
+
+\textit{2025} Berkeley/Sloan Summer School in Environmental and Energy Economics (Student Presentation)
+
+
+%----------------------------------------------------------------------------------------
+% EXPERIENCE SECTIONS
+%----------------------------------------------------------------------------------------
+
+
+%Experience
+\section{Work Experience}
+
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}X r@{}}
+Electric Power Research Institute (EPRI) — Sustainability Data Analyst & August 2025 - present \\
+The World Bank — Internship Program (BIP)                            & April 2025 - July 2025 \\
+Sustainable Capital Advisors — Research Fellow                       & September 2023 - April 2025 \\
+Center for Retirement Research — Research Associate                   & May 2020 - August 2022 \\
+\end{tabularx}
+
+%----------------------------------------------------------------------------------------
+%	SKILLS
+%----------------------------------------------------------------------------------------
+\section{Skills}
+\begin{tabularx}{\linewidth}{@{}l X@{}}
+Languages & \normalsize{English (native), Spanish (native), French (intermediate)} \\
+Programming \& Tools & \normalsize{Stata, R, Python, SQL, ArcGIS, \LaTeX, Linux (HPC cluster), GitHub, HTML} \\
+Datasets  & \normalsize{Bloomberg, WITS, PATSTAT, MSCI ESG, FactSet, Input--Output tables} \\
+Methods   & \normalsize{Causal inference, machine learning, geospatial analysis, web scraping} \\
+\end{tabularx}
+
+
+
+\vfill
+\center{\footnotesize Last updated: \today}
+
+\end{document}

@@ -1,0 +1,85 @@
+name: Build and deploy CV PDF
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Install LaTeX
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y latexmk texlive-latex-extra texlive-latex-recommended texlive-fonts-recommended texlive-fonts-extra texlive-bibtex-extra biber
+
+      - name: Compile CV
+        run: |
+          latexmk -pdf -interaction=nonstopmode -halt-on-error cv.tex
+
+      - name: Prepare Pages site
+        run: |
+          mkdir -p site
+          cp cv.pdf site/Nastri_CV_2026.pdf
+
+          cat > site/index.html <<'EOF'
+          <!doctype html>
+          <html lang="en">
+          <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <title>Nico Nastri CV</title>
+            <style>
+              html, body {
+                margin: 0;
+                padding: 0;
+                height: 100%;
+                background: #ffffff;
+              }
+              iframe {
+                border: 0;
+                width: 100%;
+                height: 100vh;
+              }
+            </style>
+          </head>
+          <body>
+            <iframe src="./Nastri_CV_2026.pdf"></iframe>
+          </body>
+          </html>
+          EOF
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

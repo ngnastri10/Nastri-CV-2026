@@ -1,0 +1,17 @@
+*.aux
+*.bbl
+*.bbl-SAVE-ERROR
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.run.xml
+*.synctex.gz
+*.toc
+*.xdv
+
+# compiled output - the GitHub Action builds and deploys this fresh,
+# no need to track it in the repo
+cv.pdf
