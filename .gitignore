@@ -15,3 +15,6 @@
 # compiled output - the GitHub Action builds and deploys this fresh,
 # no need to track it in the repo
 cv.pdf
+
+# kept locally for reference only, not published to the repo
+README.md
