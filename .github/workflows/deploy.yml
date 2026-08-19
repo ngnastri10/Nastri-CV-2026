@@ -18,15 +18,18 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
 
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
 
       - name: Install LaTeX
+        env:
+          DEBIAN_FRONTEND: noninteractive
         run: |
           sudo apt-get update
-          sudo apt-get install -y latexmk texlive-latex-extra texlive-latex-recommended texlive-fonts-recommended texlive-fonts-extra texlive-bibtex-extra biber
+          sudo apt-get install -y --no-install-recommends latexmk texlive-latex-extra texlive-latex-recommended texlive-fonts-recommended texlive-fonts-extra texlive-bibtex-extra biber
 
       - name: Compile CV
         run: |
